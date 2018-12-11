@@ -19,6 +19,34 @@ let books = [
 
 
 class App extends Component {
+  // first life cycle method - constructor
+  // only runs when component gets istantiated
+  constructor() {
+    // gives us ability from the Component class to use state
+    super();
+
+    // us state to hold variables attached to instance of component
+    this.state = {
+      books: [],
+      name:'Jeff Babio'
+    }
+  }
+
+
+// second life cycle method - componentWillMount()
+// generally good for initializing variables or the state
+// gets hit before each rende
+componentWillMount() {
+  // use setState() method to alter books variable
+  this.setState({
+    books: books
+  });
+}
+
+
+
+  // third life cycle method decides what gets returned and rendered on the browser
+  // gets hit every render
   render() {
     // Thhis javascript
     const s = 'Hello, World';
@@ -26,9 +54,9 @@ class App extends Component {
     // below this line, within the return is JSX
     return (
       <div className="App">
-      <h2>{this.props.name}</h2>
+      <h2>{this.state.name}</h2>
       {/* This is JSX inside of the retrun parenthesis */}
-      {books.map(book =>
+      {this.state.books.map(book =>
         <div key={book.id}>
           <span>
           <a href={book.url} target="_blank">{book.title}</a>
